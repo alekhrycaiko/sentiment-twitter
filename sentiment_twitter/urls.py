@@ -13,9 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.http import HttpResponse, JsonResponse
 from django.conf.urls import url
 from django.contrib import admin
+from rest_framework.views import APIView
+from rest_framework.Response import Response
+
+class CompanyData(APIView):
+    def get(self, request):
+        #username = self.kwargs['pk']
+        return JsonResponse({'hello': 'world'})
+
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'(?P<pk>\d+)/$', CompanyData.as_view()),
 ]
