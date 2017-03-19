@@ -19,14 +19,15 @@ def getThreeYearClosingPrices(ticker, days):
         prices[t] = price_data
 
         for day in data:
-            price_data.append(round(float(day['Close'])))
+            price_data.append(round(float(day['Close']), 2))
 
         price_data.reverse()
     # print prices
     return prices
 
 ticker = ['AAPL', 'FB', 'XOM', 'NVDA', 'NFLX', 'ADBE']
-# getThreeYearClosingPrices(ticker, 5)
+
+#print(getThreeYearClosingPrices(ticker, 5))
 
 
 
