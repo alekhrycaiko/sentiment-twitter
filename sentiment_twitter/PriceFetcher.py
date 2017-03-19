@@ -1,9 +1,5 @@
 from yahoo_finance import Share
 import datetime
-
-import collections
-import jsonpickle
-
 from dateutil.relativedelta import relativedelta
 
 """
