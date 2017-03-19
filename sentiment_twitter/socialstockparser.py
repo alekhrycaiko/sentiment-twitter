@@ -7,10 +7,10 @@ import schedule
 from datetime import date
 from sentiment_twitter import sentiment_api
 
-consumer_key = 'AX99l75lGAiEXKewGv6UbjnzP'
-consumer_secret = 'UJtQXT02ieWvAEPy3kk7iqYMkL6Vom7zfIdTJZlyvMkSqegvPw'
-access_token = '727254860375052289-dImeSLNMLOs4pDxnqypV3hytZL4rF49'
-access_secret = 'khWVlagGWmJ6S5F3rjt9wLJDTXBzZm4Hr4TqRdbzMwcIQ'
+consumer_key = '4pAS5n5wiqrLUotVFGcgAbQ9g'
+consumer_secret = 'FxWIFR8c1Dk4D64ZJqo0pls5LPp9664wzbvJJz2LyYyifxP4Dn'
+access_token = '2479204615-f69dFnvC7HRs9PLpTMGxAIVTpHgUUkAJv8dRHgY'
+access_secret = '9cFQIBGSjVNPOK2UAlleQMJi8ol76T1ViN2NROc4dhGxC'
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_secret)
 api = tweepy.API(auth)
