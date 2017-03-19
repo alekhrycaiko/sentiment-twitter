@@ -7,19 +7,26 @@ Call with a ticket symbol to get an array of closing prices for the last three y
 function is called.  The returned array consists of pricepoint tuples, which can be accessed with .date and .price
 fields
 """
-def getThreeYearClosingPrices(ticker):
-    facebook = Share(ticker)
-    data = facebook.get_historical((datetime.datetime.now() - relativedelta(years=3)).strftime("%Y-%m-%d"),
-                                   datetime.datetime.now().strftime("%Y-%m-%d"))
-    price_data = []
 
-    for day in data:
-        pp = {'day': day['Date'], 'price': round(float(day['Close']), 2)}
-        price_data.append(pp)
 
-    price_data.reverse()
-    return price_data
+def getThreeYearClosingPrices(ticker, days):
+    prices = {}
+    for t in ticker:
+        facebook = Share(t)
+        data = facebook.get_historical((datetime.datetime.now() - relativedelta(days=days)).strftime("%Y-%m-%d"),
+                                       datetime.datetime.now().strftime("%Y-%m-%d"))
+        price_data = []
+        prices[t] = price_data
 
+        for day in data:
+            price_data.append(round(float(day['Close'])))
+
+        price_data.reverse()
+    # print prices
+    return prices
+
+ticker = ['AAPL', 'FB', 'XOM', 'NVDA', 'NFLX', 'ADBE']
+# getThreeYearClosingPrices(ticker, 5)
 
 
 

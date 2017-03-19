@@ -1,5 +1,4 @@
 import time
-
 import datetime as DT
 import tweepy
 import re
@@ -14,7 +13,7 @@ access_token = '727254860375052289-dImeSLNMLOs4pDxnqypV3hytZL4rF49'
 access_secret = 'khWVlagGWmJ6S5F3rjt9wLJDTXBzZm4Hr4TqRdbzMwcIQ'
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_secret)
-api = tweepy.API(auth, wait_on_rate_limit=True)
+api = tweepy.API(auth)
 html_parser = HTMLParser.HTMLParser()
 
 
@@ -30,18 +29,19 @@ def tweetText(d, count, since, until):
 
         while True:
             try:
+                tweet = public_tweets.next()
                 # Insert into db - potential for large data set for historical analysis
                 for tweet in public_tweets:
                     t = tweet.text
                     text = re.sub(r"http\S+", "", t)
                     text = html_parser.unescape(text)
+                    text = re.sub('[^A-Za-z0-9]+', ' ', text)
                     tweets.append(text)
             except tweepy.TweepError:
                 time.sleep(60 * 15)
                 continue
             except StopIteration:
                 break
-
     print data
     return data
 
@@ -74,8 +74,6 @@ def company_sentiments():
 
 print company_sentiments()
 
-# save to db?
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+# while True:
+#     schedule.run_pending()
+#     time.sleep(1)
