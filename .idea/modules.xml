@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/sentiment-twitter.iml" filepath="$PROJECT_DIR$/.idea/sentiment-twitter.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/sentiment-twitter.iml" filepath="$PROJECT_DIR$/.idea/sentiment-twitter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/sentiment_twitter.iml" filepath="$PROJECT_DIR$/.idea/sentiment_twitter.iml" />
     </modules>
   </component>
 </project>

@@ -16,6 +16,7 @@ Including another URLconf
 
 from django.conf.urls import url
 from django.contrib import admin
+from django.views.generic.base import TemplateView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from PriceFetcher import getThreeYearClosingPrices
@@ -30,6 +31,7 @@ class StockData(APIView):
 
 
 urlpatterns = [
+    url(r'^$', TemplateView.as_view(template_name='graph.html')),
     url(r'^admin/', admin.site.urls),
     url(r'^pricedata/', StockData.as_view()),
 ]
