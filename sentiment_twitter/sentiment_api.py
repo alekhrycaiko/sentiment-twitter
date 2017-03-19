@@ -1,5 +1,4 @@
 import requests
-import re
 
 
 def get_sentiment_average(text_array):
