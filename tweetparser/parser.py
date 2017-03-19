@@ -6,6 +6,7 @@ import re
 import HTMLParser
 import schedule
 from datetime import date
+from sentiment_twitter import sentiment_api
 
 consumer_key = 'AX99l75lGAiEXKewGv6UbjnzP'
 consumer_secret = 'UJtQXT02ieWvAEPy3kk7iqYMkL6Vom7zfIdTJZlyvMkSqegvPw'
@@ -44,11 +45,34 @@ def tweetText(d, count, since, until):
     print data
     return data
 
-# change list of companies and count to 1000
-d = ["apple", "facebook", "exxon", "nvidia", "netflix", "adobe"]
-tweetText(d, 5, date.today()-DT.timedelta(days=7), date.today())
 
-schedule.every(3).days.at("01:00").do(tweetText(d, 5000, date.today()-DT.timedelta(days=3), date.today()))
+def extract_company_tweets(dictionary):
+    total = {}
+    for key in dictionary:
+        company = {}
+        tweets = []
+        for text in dictionary[key]:
+            tweets.append({"text": text})
+        company["data"] = tweets
+        total[key] = company
+    print total
+    return total
+
+
+def company_sentiments():
+    # change list of companies and count to 1000
+    d = ["apple", "facebook", "exxon", "nvidia", "netflix", "adobe"]
+    q = tweetText(d, 5, date.today() - DT.timedelta(days=7), date.today())
+
+    schedule.every(3).days.at("01:00").do(tweetText(d, 5000, date.today() - DT.timedelta(days=3), date.today()))
+
+    ret = {}
+    for key in q:
+        sentiment = sentiment_api.get_sentiment_average(extract_company_tweets(q))
+        ret[key] = sentiment
+    return ret
+
+print company_sentiments()
 
 # save to db?
 
